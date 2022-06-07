@@ -9,5 +9,5 @@ export function mostrarError(message) {
     setTimeout(() => {
         alerta.innerText = ''
         alerta.style = '';
-    }, 15000);
+    }, 4000);
 }

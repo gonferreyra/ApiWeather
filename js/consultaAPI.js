@@ -10,7 +10,7 @@ export function consultarAPI(ciudad, pais) {
         .then(res => res.json())
         .then(data => {
             if (data.cod === '404') {
-                mostrarError('No existe la ciudad');
+                mostrarError('No existe la ciudad ingresada, intente nuevamente');
             } else {
                 mostrarHTML(data)
             }

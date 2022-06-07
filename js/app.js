@@ -1,4 +1,5 @@
 // import { consultarAPI } from './consultaAPI.js'
+import { mostrarError } from "./error.js"
 
 import { consultarAPI } from "./consultaAPI.js"
 
@@ -18,16 +19,16 @@ function buscarClima(e) {
     `;
     const ciudad = document.querySelector('#ciudad').value
     const pais = document.querySelector('#pais').value
-    if(ciudad == '' || pais == '') {
-        alert('Campos incompletos, verifique los datos ingresados');
+    if (ciudad == '' || pais == '') {
+        mostrarError('Debe ingresar ciudad y pais. Intente nuevamente');
     } else {
         const data = consultarAPI(ciudad, pais)
         // console.log(data);
-    }    
+    }
 }
 
 export const mostrarHTML = (data) => {
-    const {name, main:{temp, temp_max, temp_min}} = data;
+    const { name, main: { temp, temp_max, temp_min } } = data;
     // console.log(mostrarCelcius(temp));
     console.log(data)
 
