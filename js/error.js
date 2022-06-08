@@ -7,7 +7,6 @@ export function mostrarError(message) {
     alerta.innerText = message
     container.appendChild(alerta)
     setTimeout(() => {
-        alerta.innerText = ''
-        alerta.style = '';
+        alerta.remove();
     }, 4000);
 }

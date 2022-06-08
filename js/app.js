@@ -13,7 +13,6 @@ window.addEventListener('load', () => {
 
 function buscarClima(e) {
     e.preventDefault()
-    // console.log('Buscando Clima');
     resultado.innerHTML = `
         <p class="text-center text-white mt-6">Agrega tu ciudad y país, el resultado se mostrará aquí</p>
     `;
@@ -23,24 +22,25 @@ function buscarClima(e) {
         mostrarError('Debe ingresar ciudad y pais. Intente nuevamente');
     } else {
         const data = consultarAPI(ciudad, pais)
-        // console.log(data);
     }
 }
 
 export const mostrarHTML = (data) => {
-    const { name, main: { temp, temp_max, temp_min } } = data;
-    // console.log(mostrarCelcius(temp));
-    console.log(data)
-
+    const { name, main: { temp, temp_max, temp_min }, weather: [{ icon }] } = data;
     resultado.innerHTML = `
     <div class='weatherdiv'>
     <h2 class='weatherh2 text-center text-white'>Temperatura en ${name}</h2>
-    <p class='weatherp text-center text-white'>Actual: ${(temp - 273.15).toFixed(1)} Grados</p>
-    <p class='weatherp text-center text-white'>Maxima: ${(temp_max - 273.15).toFixed(1)}° C</p>
-    <p class='weatherp text-center text-white'>Minima: ${(temp_min - 273.15).toFixed(1)}° C</p>
+    <p class='weatherp text-center text-white'>${kelvinToCelcius(temp)} °C</p>
+    <p> <img src="http://openweathermap.org/img/wn/${icon}@2x.png"  class='weatherIcon' alt=""> </p>
+    <p class='weatherp text-center text-white'>Maxima: ${(temp_max - 273.15).toFixed(1)}°</p>
+    <p class='weatherp text-center text-white'>Minima: ${(temp_min - 273.15).toFixed(1)}°</p>
     </div>
     `
 };
+
+const kelvinToCelcius = (temp) => {
+    return (temp - 273.15).toFixed(1)
+}
 
 /* 
 Validacion para que no envien input vacios 
